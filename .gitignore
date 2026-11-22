@@ -1,0 +1,16 @@
+node_modules/
+.next/
+out/
+build/
+coverage/
+.vercel/
+
+*.tsbuildinfo
+next-env.d.ts
+
+npm-debug.log*
+.DS_Store
+
+# 환경 변수 (절대 커밋하지 않음)
+.env
+.env*.local
