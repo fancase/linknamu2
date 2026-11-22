@@ -4,8 +4,80 @@
 
 :root {
   color-scheme: light;
+  --page-base: #fff8ee;
+  --page-gradient: linear-gradient(165deg, #fffaf1 0%, #fff0df 48%, #ffd9c2 100%);
+  --page-glow-1: rgba(255, 190, 150, 0.5);
+  --page-glow-2: rgba(255, 228, 170, 0.6);
+  --glass-bg: rgba(255, 255, 255, 0.46);
+  --glass-bg-hover: rgba(255, 255, 255, 0.64);
+  --glass-border: rgba(255, 255, 255, 0.78);
+  --glass-shadow: 0 10px 30px -12px rgba(150, 88, 50, 0.28);
+  --glass-shadow-hover: 0 14px 34px -12px rgba(150, 88, 50, 0.36);
+  --glass-highlight: rgba(255, 255, 255, 0.7);
 }
 
 :root.dark {
   color-scheme: dark;
+  --page-base: #1a1411;
+  --page-gradient: linear-gradient(165deg, #1a1411 0%, #241914 52%, #38231a 100%);
+  --page-glow-1: rgba(214, 112, 62, 0.2);
+  --page-glow-2: rgba(226, 165, 92, 0.1);
+  --glass-bg: rgba(255, 240, 225, 0.07);
+  --glass-bg-hover: rgba(255, 240, 225, 0.12);
+  --glass-border: rgba(255, 236, 218, 0.14);
+  --glass-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.6);
+  --glass-shadow-hover: 0 14px 34px -12px rgba(0, 0, 0, 0.7);
+  --glass-highlight: rgba(255, 240, 225, 0.1);
+}
+
+html {
+  background-color: var(--page-base);
+}
+
+/* 모바일 주소창이 움직여도 배경이 밀리지 않도록 고정 레이어로 둡니다. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 12% 18%, var(--page-glow-2), transparent 42%),
+    radial-gradient(circle at 88% 72%, var(--page-glow-1), transparent 46%),
+    var(--page-gradient);
+}
+
+@layer components {
+  .glass {
+    border: 1px solid var(--glass-border);
+    background-color: var(--glass-bg);
+    box-shadow:
+      var(--glass-shadow),
+      inset 0 1px 0 var(--glass-highlight);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    backdrop-filter: blur(18px) saturate(140%);
+    transition:
+      background-color 200ms ease,
+      box-shadow 200ms ease,
+      transform 200ms ease;
+  }
+
+  @media (hover: hover) {
+    .glass:hover {
+      background-color: var(--glass-bg-hover);
+      box-shadow:
+        var(--glass-shadow-hover),
+        inset 0 1px 0 var(--glass-highlight);
+      transform: translateY(-1px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .glass {
+      transition: none;
+    }
+
+    .glass:hover {
+      transform: none;
+    }
+  }
 }

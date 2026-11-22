@@ -10,14 +10,14 @@ export default async function Home() {
   const counts = await getClickCounts();
 
   return (
-    <main className="relative mx-auto min-h-screen w-full max-w-md px-4 pb-10 pt-12 sm:pt-16">
-      <div className="absolute right-4 top-4">
+    <main className="relative mx-auto min-h-screen w-full max-w-[28rem] px-6 pb-16 pt-20 sm:pt-24">
+      <div className="absolute right-5 top-5">
         <ThemeToggle />
       </div>
 
       <Profile {...profile} />
 
-      <ul className="mt-8 flex flex-col gap-5">
+      <ul className="mt-10 flex flex-col gap-5">
         {links.map((link) => (
           <li key={link.id}>
             <LinkCard

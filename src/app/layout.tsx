@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { profile } from "@/data/profile";
+import "pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -23,7 +24,7 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className="min-h-screen bg-stone-50 text-stone-900 antialiased transition-colors dark:bg-stone-950 dark:text-stone-100">
+      <body className="min-h-screen font-sans text-stone-800 antialiased dark:text-orange-50">
         {children}
       </body>
     </html>

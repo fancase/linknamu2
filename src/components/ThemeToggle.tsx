@@ -15,7 +15,7 @@ export default function ThemeToggle() {
       type="button"
       onClick={toggleTheme}
       aria-label="밝은 화면과 어두운 화면 전환"
-      className="flex h-11 w-11 items-center justify-center rounded-full border border-stone-200 bg-white text-stone-700 transition hover:border-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600 dark:border-stone-800 dark:bg-stone-900 dark:text-stone-200"
+      className="glass flex h-11 w-11 items-center justify-center rounded-full text-stone-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-700 dark:text-orange-100 dark:focus-visible:outline-orange-300"
     >
       {/* 달: 밝은 화면에서 표시 */}
       <svg className="h-5 w-5 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
