@@ -5,12 +5,12 @@ const globalForMongo = globalThis as typeof globalThis & {
 };
 
 export function isMongoConfigured() {
-  return Boolean(process.env.MONGODB_URI);
+  return Boolean(process.env.MONGO_URI);
 }
 
 export async function getDb() {
-  const uri = process.env.MONGODB_URI;
-  if (!uri) throw new Error("MONGODB_URI is not set");
+  const uri = process.env.MONGO_URI;
+  if (!uri) throw new Error("MONGO_URI is not set");
 
   // 서버리스 환경과 개발 서버 재시작에서 연결을 재사용합니다.
   if (!globalForMongo.mongoClientPromise) {

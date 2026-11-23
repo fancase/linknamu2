@@ -1,25 +1,17 @@
 "use client";
 
-import { useState, type MouseEvent } from "react";
+import type { MouseEvent } from "react";
 import type { LinkItem } from "@/data/profile";
 
 type LinkCardProps = {
   link: LinkItem;
-  /** null이면 집계를 사용할 수 없는 상태이므로 숫자를 숨깁니다. */
-  initialCount: number | null;
+  count: number;
+  onRecordClick: () => void;
 };
 
-export default function LinkCard({ link, initialCount }: LinkCardProps) {
-  const [count, setCount] = useState(initialCount);
-
-  function recordClick() {
-    // sendBeacon은 페이지를 벗어나는 중에도 요청 전송을 보장합니다.
-    navigator.sendBeacon(`/api/clicks/${encodeURIComponent(link.id)}`);
-    setCount((current) => (current === null ? null : current + 1));
-  }
-
+export default function LinkCard({ link, count, onRecordClick }: LinkCardProps) {
   function handleAuxClick(event: MouseEvent<HTMLAnchorElement>) {
-    if (event.button === 1) recordClick(); // 마우스 가운데 버튼
+    if (event.button === 1) onRecordClick(); // 마우스 가운데 버튼
   }
 
   // mailto 링크는 새 탭을 열면 빈 탭이 남으므로 웹 주소만 새 탭으로 엽니다.
@@ -31,7 +23,7 @@ export default function LinkCard({ link, initialCount }: LinkCardProps) {
     <a
       href={link.url}
       {...newTabProps}
-      onClick={recordClick}
+      onClick={onRecordClick}
       onAuxClick={handleAuxClick}
       className="glass flex min-h-[4.75rem] items-center justify-between gap-3 rounded-3xl px-4 py-3.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-700 dark:focus-visible:outline-orange-300"
     >
@@ -51,11 +43,9 @@ export default function LinkCard({ link, initialCount }: LinkCardProps) {
           </span>
         </span>
       </span>
-      {count !== null && (
-        <span className="shrink-0 rounded-full bg-white/55 px-2.5 py-1 text-xs font-medium tabular-nums text-stone-600 dark:bg-orange-50/10 dark:text-orange-100/80">
-          {count.toLocaleString("ko-KR")}회
-        </span>
-      )}
+      <span className="shrink-0 rounded-full bg-white/55 px-2.5 py-1 text-xs font-medium tabular-nums text-stone-600 dark:bg-orange-50/10 dark:text-orange-100/80">
+        {count.toLocaleString("ko-KR")}회
+      </span>
     </a>
   );
 }
